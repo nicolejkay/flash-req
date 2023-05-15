@@ -26,16 +26,3 @@ def ask_ai(prompt):
     )
 
     return response
-prompt = '''Below, I will give you some information about a new product and I need you to respond with a set of 20 functional 
-            requirements and 20 non-functional system level requirements that could be used as a starting point for the development 
-            of that product.
-            
-            The product name is ActivityDetect.
-            The product is described as: A customer has requested a new system which takes visual input from a camera sensor and identifies unusual activity. 
-            The system needs to inform the user when unusual activity is detected via a message on a PC screen
-            including a timestamp and a screenshot of the camera input at the time the activity was detected. 
-            The camera and PC screen are outside of the scope of the system, the system is only the software that takes the input from the camera and produces the output as a message on a software GUI
-            '''
-
-response = ask_ai(prompt)
-print(response)
