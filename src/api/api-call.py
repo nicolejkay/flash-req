@@ -1,5 +1,6 @@
+import os
 import openai
-openai.api_key = ""
+openai.api_key = os.getenv("OPENAI_KEY")
 
 def get_prompt(productName, productDescription, numFunct, numNonfunct):
     return f'''Below, I will give you some information about a new product and I need you to respond with a set of {numFunct} functional 
