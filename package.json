@@ -1,0 +1,8 @@
+{
+  "devDependencies": {
+    "vercel": "^30.2.1"
+  },
+  "dependencies": {
+    "openai": "^3.2.1"
+  }
+}

@@ -35,12 +35,3 @@ def ask_ai(prompt):
     )
 
     return response
-
-
-
-
-print("<br><b>First Name</b>",f_name)
-print("<br><b>Second Name</b>",s_name)
-print("<br><b>Sex</b>",r1)
-print("<br><b>Class</b>",my_class)
-print("<br><br><br><a href=form.htm>Back to Form</a>")
