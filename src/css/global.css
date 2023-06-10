@@ -1,0 +1,23 @@
+:root {
+    --darkblue: #0B132B;
+    --blue: #006BA6;
+    --iceblue: #EFFBFB;
+    --grey: #A4BAB7;
+    --yellow: #FFBC42;
+  }
+
+  body { background-color: var(--iceblue); }
+
+  h2 { border-bottom: 2px solid var(--blue); }
+
+
+  .centered {
+
+  }
+
+  button {
+    background-color: var(--white);
+    color: var(--blue);
+    border: 1px solid var(--blue);
+    padding: 5px;
+  }
