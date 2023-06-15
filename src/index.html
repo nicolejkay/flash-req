@@ -3,40 +3,91 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
-    <link rel="stylesheet" href="css/global.css">
-    <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
-    <title>FlashReq</title>
+    <link rel="stylesheet" href="/css/global.css">
+    <link rel="icon" href="/favicon.ico">
+    <link rel="apple-touch-icon" sizes="57x57" href="/assets/images/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/assets/images/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="/assets/images/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="/assets/images/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/assets/images/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="/assets/images/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="/assets/images/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="/assets/images/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192"  href="/assets/images/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="/assets/images/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon-16x16.png">
+    <link rel="manifest" href="/assets/manifest.json">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
+    <meta name="theme-color" content="#ffffff">
+    <title>FlashReq - Lightning-fast product requirement generation using AI</title>
   </head>
 
-  <body>
-
-    <div id="logo" class="centered">
-    <img src="images/logo.png" alt="FlashReq Logo" style="width:450px;height:230px;">
+  <body class="container">
+    <div class="flex-container fullscreen column">
+      <div id="logo"><img src="assets/images/logo.png" alt="FlashReq Logo" style="width:600px;height:300px;"></div>
+      <div id="tagline"><h2>Lightning-fast product requirement generation using AI</h2></div>
+      <div id="button" onclick="scrollToInput()"><button>Try it for free now!</button></div>
     </div>
-    <h2>Super-fast AI-powered Requirements generation to bring your next great idea to life as quick as a flash.</h2>
-    <h3>Give us some info about your idea:</h3>
-    <form action="/api/form" method="post">
-      <ul>
-        <li>
-          <label for="productName">Product Name:</label>
-          <input type="text" id="productName" name="productName" />
-        </li>
-        <li>
-          <label for="productDescription">Product Description:</label>
-          <textarea id="productDescription" name="productDescription"></textarea>
-        </li>
-        <li>
-          <label for="numFunct">No. Functional Requirements:</label>
-          <input type="number" id="numFunct" name="numFunct" />
-        </li>
-        <li>
-          <label for="numNonfunct">No. Non-functional Requirements:</label>
-          <input type="number" id="numNonfunct" name="numNonfunct" />
-        </li>
-        <li class="button">
-          <button type="submit">Generate your Product Requirements!</button>
-        </li>
-      </ul>
-    </form>
+
+    <div id="spacer" style="height:50px"></div>
+
+
+    <div id="requirementsGenerator" class="flex-container row fullscreen">
+      <div id="dataEntryBox" class="rounded-box half-width">
+        <form action="/api/form" method="post">
+          <ul>
+            <li>
+              <label for="productName">Product Name:</label>
+              <input type="text" id="productName" name="productName" />
+            </li>
+            <li>
+              <label for="productDescription">Product Description:</label>
+              <textarea id="productDescription" name="productDescription"></textarea>
+            </li>
+            <li>
+              <label for="numFunct">No. Functional Requirements:</label>
+              <input type="number" id="numFunct" name="numFunct" />
+            </li>
+            <li>
+              <label for="numNonFunct">No. Non-functional Requirements:</label>
+              <input type="number" id="numNonFunct" name="numNonFunct" />
+            </li>
+          </ul>
+        </form>
+
+      <button onclick="submitData()">TEST - Generate your Product Requirements!</button>
+      </div>
+
+      <div id="GPTOutput" class="rounded-box half-width">
+          Output
+      </div>
+    </div>
 </body>
 </html>
+
+<script>
+
+function scrollToInput() {
+var element = document.getElementById("dataEntryBox");
+element.scrollIntoView({behavior: "smooth"});
+}
+
+async function submitData() {
+  const response = await fetch('/api/form',{
+	method: 'POST',
+	body: JSON.stringify({
+		productName: document.getElementById('productName').value,
+		productDescription : document.getElementById('productDescription').value,
+		numFunct: document.getElementById('numFunct').value,
+    numNonFunct: document.getElementById('numNonFunct').value
+	}),
+	headers: {
+		'Content-type': 'application/json; charset=UTF-8'
+	}});
+
+  document.getElementById("GPTOutput").innerHTML = response;
+}
+</script>
