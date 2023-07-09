@@ -36,6 +36,11 @@ button {
  padding-right: 20px;
 }
 
+.flex {
+    display: flex;
+    justify-content: space-between;
+}
+
 .flex-container {
     display: flex;
     align-items: center;

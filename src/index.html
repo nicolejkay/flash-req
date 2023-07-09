@@ -36,7 +36,7 @@
 
 
     <div id="requirementsGenerator" class="flex-container row fullscreen">
-      <div id="dataEntryBox" class="rounded-box half-width">
+      <div id="dataEntryBox" class="rounded-box half-width flex column">
         <form action="/api/form" method="post">
           <ul>
             <li>
@@ -71,7 +71,7 @@
 <script>
 
 function scrollToInput() {
-  var element = document.getElementById("dataEntryBox");
+  var element = document.getElementById("requirementsGenerator");
   element.scrollIntoView({behavior: "smooth"});
 }
 
