@@ -58,7 +58,7 @@
           </ul>
         </form>
 
-      <button onclick="submitData()">TEST - Generate your Product Requirements!</button>
+      <button onclick="submitData()">Generate your Product Requirements!</button>
       </div>
 
       <div id="GPTOutput" class="rounded-box half-width">
@@ -71,23 +71,27 @@
 <script>
 
 function scrollToInput() {
-var element = document.getElementById("dataEntryBox");
-element.scrollIntoView({behavior: "smooth"});
+  var element = document.getElementById("dataEntryBox");
+  element.scrollIntoView({behavior: "smooth"});
 }
 
 async function submitData() {
-  const response = await fetch('/api/form',{
-	method: 'POST',
-	body: JSON.stringify({
-		productName: document.getElementById('productName').value,
-		productDescription : document.getElementById('productDescription').value,
-		numFunct: document.getElementById('numFunct').value,
-    numNonFunct: document.getElementById('numNonFunct').value
-	}),
-	headers: {
-		'Content-type': 'application/json; charset=UTF-8'
-	}});
+  const output = await fetch('/api/form', {
+    method: 'POST',
+    body: JSON.stringify({
+      productName: document.getElementById('productName').value,
+      productDescription : document.getElementById('productDescription').value,
+      numFunct: document.getElementById('numFunct').value,
+      numNonFunct: document.getElementById('numNonFunct').value
+    }),
+    headers: {
+      'Content-type': 'application/json; charset=UTF-8'
+    }
+  });
 
-  document.getElementById("GPTOutput").innerHTML = response;
+  const data = await output.json();
+
+  console.log("check:", data);
+  document.getElementById("GPTOutput").innerHTML = data.response;
 }
 </script>

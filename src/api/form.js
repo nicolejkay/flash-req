@@ -4,7 +4,16 @@ const role = `you are an experienced requirements engineer working to the best p
             as stated in the INCOSE Systems Engineering Book of Knowledge (SEBoK).
             You are tasked with writing system requirement documents based on system information that you will be provided.
             The requirements you write should be in simple English, be unique, verifiable,
-            and provide a starting point for further system development. Use markup language and format the requirements into a table with the following columns: Requirement ID, Requirement Type, Requirement Text. `
+            and provide a starting point for further system development.
+
+            Return the requirements as a JSON object with the following headings:
+            - Requirement ID (a 4 digit number starting from 0000, increasing sequentially, e.g 0000, 0001, 0002, 0003, 0004)
+            - Requirement Type (will be either 'Functional' or 'Non-functional')
+            - Requirement Classification (The best fit from the following list: Functional, Performance, Usability, Interface, Operational, Modes, Adaptability, Physical Constraints,
+            - Design Constraints, Environmental Conditions, Logistics, Policy and Regulation, Cost and Schedule)
+            - Requirement Text (the text of the requirement itself)
+            - Verification Criteria (a short statement describing how it could be verified that the requirement is satisfied)
+            You should only return the above with no text outside of the JSON object.  `
 
 function get_prompt(productName, productDescription, numFunct, numNonFunct) {
     return `Below, I will give you some information about a new product and I need you to respond with a set of ${numFunct} functional
@@ -29,7 +38,8 @@ async function ask_ai(prompt) {
         top_p: 1,
         n: 1,
         frequency_penalty: 0,
-        presence_penalty: 0
+        presence_penalty: 0,
+        stop: 'You:'
     })
 
     return completion.data.choices[0].message.content;
@@ -46,8 +56,6 @@ export default async function (request, response) {
     const ai = await ask_ai(prompt);
     console.log('Response:', ai);
 
-    const output = ai;
-
-    return response.send(`<pre>${output}</pre>`);
+    return response.json({response: ai});
 }
 
